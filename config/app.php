@@ -1,5 +1,7 @@
 <?php
 
+use OwenIt\Auditing\AuditingServiceProvider;
+
 return [
 
     /*
@@ -67,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tbilisi',
 
     /*
     |--------------------------------------------------------------------------
@@ -81,6 +83,13 @@ return [
     */
 
     'locale' => 'en',
+
+    /**
+     * All locale list.
+     */
+    'locales'   => [
+        'en'
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -163,10 +172,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -174,6 +179,14 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        /*
+         * Package Service Providers...
+         */
+        OwenIt\Auditing\AuditingServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
     ],
 
