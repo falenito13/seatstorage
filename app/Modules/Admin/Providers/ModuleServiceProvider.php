@@ -5,9 +5,11 @@ namespace App\Modules\Admin\Providers;
 use App\Modules\Admin\Repositories\Contracts\IAdminRepository;
 use App\Modules\Admin\Repositories\Contracts\IPermissionRepository;
 use App\Modules\Admin\Repositories\Contracts\IRoleRepository;
+use App\Modules\Admin\Repositories\Contracts\ITextRepository;
 use App\Modules\Admin\Repositories\Eloquent\AdminRepository;
 use App\Modules\Admin\Repositories\Eloquent\PermissionRepository;
 use App\Modules\Admin\Repositories\Eloquent\RoleRepository;
+use App\Modules\Admin\Repositories\Eloquent\TextRepository;
 use Caffeinated\Modules\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
@@ -52,6 +54,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->bind(IPermissionRepository::class, PermissionRepository::class);
         $this->app->bind(IAdminRepository::class, AdminRepository::class);
         $this->app->bind(IRoleRepository::class, RoleRepository::class);
+        $this->app->bind(ITextRepository::class, TextRepository::class);
 
     }
 

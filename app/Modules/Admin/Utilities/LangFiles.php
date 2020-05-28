@@ -52,6 +52,7 @@ class LangFiles
     public function getFileContent()
     {
         $filepath = $this->getFilePath();
+
         if (is_file($filepath)) {
             $wordsArray = include $filepath;
             asort($wordsArray);
@@ -72,6 +73,7 @@ class LangFiles
             $this->getFilePath(),
             print_r("<?php \n\n return ".$this->var_export54($postArray).';', true)
         );
+
         return $return;
     }
 
@@ -84,11 +86,11 @@ class LangFiles
         $fileList = [];
         foreach (is_dir($this->getLangPath()) ? scandir($this->getLangPath(), SCANDIR_SORT_DESCENDING) : [] as $file) {
             $fileName = str_replace('.php', '', $file);
-            if (! in_array($fileName, array_merge(['.', '..'], config('language_manager.language_ignore')))) {
+            if (! in_array($fileName, array_merge(['.', '..'], config('language_manager.exclude_groups')))) {
                 $fileList[] = [
                     'name' => ucfirst(str_replace('_', ' ', $fileName)),
                     'original_name' => $fileName,
-                    'url' => route('admin.translation.index', [$fileName]),
+                    'url' => route('admin.text.index', [$fileName]),
                     'active' => $fileName == $this->file,
                 ];
             }
@@ -123,7 +125,7 @@ class LangFiles
                 }
             }
         }
-        return $returnArray;
+        return $returnArray;Next &raquo;
     }
 
     /**

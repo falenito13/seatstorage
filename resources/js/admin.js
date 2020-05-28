@@ -5,16 +5,18 @@
  */
 require('./bootstrap');
 
-
-window.Vue = require('vue');
-
 import ElementUI from 'element-ui';
-// import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css';
 import { VueEditor, Quill } from "vue2-editor";
+import { Pagination } from 'element-ui';
+
 import elementLocale from 'element-ui/lib/locale/lang/en';
 
+Vue.use(Pagination);
 Vue.use(ElementUI, { locale: elementLocale });
 Vue.use(VueEditor);
+
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,7 +30,7 @@ Vue.use(VueEditor);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // admin role
-Vue.component('role-save-component', require('./admin/role/page/SaveComponent').default);
+Vue.component('admin-text-list-save', require('./admin/text/page/TextListSave').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

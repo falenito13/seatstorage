@@ -22,13 +22,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () 
 
 Route::group([
     'prefix' => 'admin',
+    'namespace' => 'Admin',
     'middleware' => ['auth:admin'],
 ], function () {
 
     /**
      * Admin Dashboard page.
      */
-    Route::get('dashboard', 'Admin\DashboardController@index')
+    Route::get('dashboard', 'DashboardController@index')
         ->name('admin.dashboard');
 
     // Translate texts
@@ -38,21 +39,23 @@ Route::group([
             $controller = 'TextController';
             $moduleName = 'text';
 
-            Route::get('/index/{file?}', $controller . '@index')
-                ->name('index')
-                    ->middleware(['permission:'.config('permission_list.' .$moduleName. '.default.index.key')]);
+            Route::get('/index', $controller . '@index')
+                ->name('index');
+            Route::post('/index-data', $controller . '@indexData')
+                ->name('index_data')
+                    ->middleware(['permission:'.getPermissionKey($moduleName, 'index', true)]);
             Route::get('/create', $controller . '@create')
                 ->name('create')
-                    ->middleware(['permission:'.config('permission_list.' .$moduleName. '.default.create.key')]);
+                    ->middleware(['permission:'.getPermissionKey($moduleName, 'create', true)]);
             Route::post('/store', $controller . '@store')
                 ->name('store')
-                    ->middleware(['permission:'.config('permission_list.' .$moduleName. '.default.create.key')]);
+                    ->middleware(['permission:'.getPermissionKey($moduleName, 'create', true)]);
             Route::post('/update', $controller . '@update')
                 ->name('update')
-                    ->middleware(['permission:'.config('permission_list.' .$moduleName. '.default.update.key')]);
+                    ->middleware(['permission:'.getPermissionKey($moduleName, 'update', true)]);
             Route::post('/delete', $controller . '@delete')
                 ->name('delete')
-                    ->middleware(['permission:'.config('permission_list.' .$moduleName. '.default.delete.key')]);
+                    ->middleware(['permission:'.getPermissionKey($moduleName, 'delete', true)]);
 
         });
 

@@ -38,6 +38,9 @@
 </script>
 <script src="{{  asset("admin_resources/js/helpers/ckeditor/ckeditor.js") }}"></script>
 @yield('footer_scripts')
+
+<script src="{{ mix('js/admin.js') }}"></script>
+
 </body>
 </html>
 
