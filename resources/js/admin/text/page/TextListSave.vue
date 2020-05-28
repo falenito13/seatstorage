@@ -1,5 +1,16 @@
 <template>
-    <div class="block">
+
+    <div>
+        <div>
+            <AddLang
+                :trans_text="trans_text"
+                :routes="routes"
+                :groups="groups"
+                :locales="all_locales"
+                :getIndexBaseData="getIndexBaseData"
+            ></AddLang>
+        </div>
+        <div class="block">
 
         <el-form class="form-horizontal form-bordered"  v-loading="loading"
                  element-loading-text="Loading..."
@@ -30,7 +41,11 @@
                                         <td>{{ key }}</td>
                                         <template v-for="loc in all_locales">
                                             <td>
-                                                <el-input placeholder="Please input" v-model="lang_files[file_name][key][loc]"></el-input>
+                                                <el-input
+                                                    @keyup.enter.native="updateText({file: file_name, key: key, text: file_text})"
+                                                    :placeholder="loc"
+                                                    v-model="lang_files[file_name][key][loc]">
+                                                </el-input>
                                             </td>
                                         </template>
                                         <td class="text-center">
@@ -42,6 +57,7 @@
                                                 icon="el-icon-check"
                                             ></el-button>
                                             <el-button
+                                                @click="deleteText({file: file_name, key: key})"
                                                 :title="trans_text.delete_title"
                                                 size="small"
                                                 type="danger"
@@ -64,15 +80,17 @@
         </el-form>
 
     </div>
+    </div>
 </template>
 
 <script>
 
     import {getData} from '../../../mixins/getData'
     import {responseParse} from '../../../mixins/responseParse'
+    import AddLang from "../partials/AddLang";
 
     export default {
-
+        components: {AddLang},
         props: [
             'indexDataRoute'
         ],
@@ -96,7 +114,9 @@
                 all_locales: [],
 
                 // Routes list.
-                routes: {}
+                routes: {},
+
+                groups: {}
 
             }
         },
@@ -104,6 +124,44 @@
           this.getIndexBaseData();
         },
         methods: {
+
+            /**
+             * Delete text.
+             */
+            async deleteText(form){
+
+                this.loading = true;
+
+                this.$confirm(this.trans_text.delete_confirm, {
+                    confirmButtonText: this.trans_text.delete_confirm_yes,
+                    cancelButtonText: this.trans_text.delete_confirm_no,
+                    type: 'warning'
+                })
+                    .then(async () => {
+
+                        await getData({
+                            method: 'POST',
+                            url: this.routes.delete,
+                            data: form
+                        }).then(response => {
+
+                            // Parse response notification.
+                            responseParse(response);
+
+                            if (response.code == 200) {
+                                this.getIndexBaseData();
+                            }
+
+                            this.loading = false;
+
+                        })
+
+
+                    }).catch(() => {
+                    this.loading = false;
+                });
+
+            },
 
             /**
              *
@@ -124,7 +182,7 @@
                     responseParse(response);
 
                     if (response.code == 200) {
-                        // this.getIndexBaseData();
+                        this.getIndexBaseData();
                     }
                     
                     this.loading = false;
@@ -163,8 +221,7 @@
                         this.trans_text = data.trans_text;
                         this.all_locales = data.locales;
                         this.routes = data.routes;
-
-                        console.log(this.lang_files);
+                        this.groups = data.groups;
 
                     }
 

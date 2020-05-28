@@ -29,8 +29,18 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// admin role
+// admin text
 Vue.component('admin-text-list-save', require('./admin/text/page/TextListSave').default);
+
+// User
+Vue.component('admin-user-save-component', require('./admin/user/page/SaveComponent').default);
+Vue.component('admin-profile-save-component', require('./admin/user/page/ProfileSaveComponent').default);
+
+// User role
+Vue.component('admin-role-save-component', require('./admin/role/page/SaveComponent').default);
+
+//Base Component
+Vue.component('delete-component', require('./components/admin/Delete').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -3,7 +3,7 @@
 
 namespace App\Modules\Admin\Repositories\Eloquent;
 
-use App\Modules\Admin\Models\Role;
+use App\Models\Role;
 use App\Modules\Admin\Repositories\Contracts\IRoleRepository;
 use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
@@ -70,13 +70,18 @@ class RoleRepository extends BaseRepository implements IRoleRepository
              */
             $this->request = $request;
 
+            $updateInfo = $request->only(['guard_name', 'name']);
+
             if ( !empty($request->get('id')) ) {
 
                 $this->role = $this->find($request->get('id'));
-                $this->role->update($request->only(['guard_name', 'name']));
+
+                if ($this->role->name != 'administrator') {
+                    $this->role->update($updateInfo);
+                }
 
             } else {
-                $this->role = $this->create($request->only(['guard_name', 'name']));
+                $this->role = $this->create($updateInfo);
             }
 
             if ( !empty($request->get('permissions') ) ) {

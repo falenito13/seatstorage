@@ -19,13 +19,13 @@
                         <!-- User Info -->
                         <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                             <div class="sidebar-user-avatar">
-                                <a href="">
+                                <a href="{{ route('admin.profile.index') }}">
                                     <img src="{{ config('admin.project_avatar') }}" alt="avatar">
                                 </a>
                             </div>
                             <div class="sidebar-user-name">{{ \Auth::user()->name }}</div>
                             <div class="sidebar-user-links">
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="პროფილი"><i class="gi gi-user"></i></a>
+                                <a href="{{ route('admin.profile.index') }}" data-toggle="tooltip" data-placement="bottom" title="პროფილი"><i class="gi gi-user"></i></a>
                                 <a href="javascript:;" class="logout-link" data-toggle="tooltip" data-placement="bottom" title="გასვლა"><i class="gi gi-exit"></i></a>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                                 <li class="dropdown-header text-center">ჩემი ანგარიში</li>
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('admin.profile.index') }}">
                                         <i class="fa fa-user fa-fw pull-right"></i>
                                         პროფილი
                                     </a>

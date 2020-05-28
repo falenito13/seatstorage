@@ -27,9 +27,21 @@ return [
      * Languages permission.
      */
     'text'     => [
-
         'default'   => $default_permissions
+    ],
 
+    /**
+     * User module permissions.
+     */
+    'user'     => [
+        'default'   => $default_permissions
+    ],
+
+    /**
+     * Roles module permissions.
+     */
+    'role'     => [
+        'default'   => $default_permissions
     ]
 
 ];

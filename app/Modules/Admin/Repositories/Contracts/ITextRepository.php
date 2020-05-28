@@ -29,9 +29,10 @@ interface ITextRepository extends IBaseRepository
 
     /**
      * @param Request $request
+     * @param bool $createEvent
      * @return mixed
      */
-    public function postEdit(Request $request);
+    public function postEdit(Request $request, $createEvent = false);
 
     /**
      * @param null $group
@@ -47,5 +48,11 @@ interface ITextRepository extends IBaseRepository
      * @return mixed
      */
     public function missingKey($namespace, $group, $key);
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteText(Request $request);
 
 }

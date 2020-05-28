@@ -1,6 +1,6 @@
 <?php
 
 return array (
-  'throttle' => 'aa',
-  'failed' => 'ab',
+  'throttle' => 'throttle',
+  'failed' => 'failed',
 );

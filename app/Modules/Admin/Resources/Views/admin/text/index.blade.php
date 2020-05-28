@@ -6,7 +6,7 @@
     <div id="page-content">
 
         <!-- Statistics Widgets Header -->
-        @include('admin::includes.header-section', ['name'   => __($langFolderName . '.'.$moduleKey.'.index') ])
+        @include('admin::includes.header-section', ['name'   => $trans_text['index']  ])
         <!-- END Statistics Widgets Header -->
 
         <!-- Responsive Full Block -->

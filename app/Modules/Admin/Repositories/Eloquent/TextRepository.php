@@ -145,12 +145,19 @@ class TextRepository extends BaseRepository implements ITextRepository
 
     /**
      * @param Request $request
+     * @param bool $createEvent
+     * @throws \Exception
      */
-    public function postEdit(Request $request)
+    public function postEdit(Request $request, $createEvent = false)
     {
         if(!in_array($request->get('file'), $this->config['exclude_groups'])) {
 
-            foreach(config('app.locales') as $locale) {
+            foreach(config('language_manager.locales') as $locale) {
+
+                if ($this->where('group', $request->get('file'))->where('key', $request->get('key'))->where('locale', $locale)->exists() && $createEvent ) {
+                    throw new \Exception('THIS_KEY_ALREADY_TAKEN');
+                }
+
                 $translation = $this->firstOrNew([
                     'locale' => $locale,
                     'group' => $request->get('file'),
@@ -293,5 +300,16 @@ class TextRepository extends BaseRepository implements ITextRepository
         }
     }
 
+    /**
+     * @param Request $request
+     * @return
+     */
+    public function deleteText(Request $request)
+    {
+
+        return $this->where('group', $request->get('file'))
+                    ->where('key', $request->get('key'))
+                        ->delete();
+    }
 
 }
