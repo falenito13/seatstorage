@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Modules\Admin\Models\BaseTranslationModel;
+
+class DummyClass extends BaseTranslationModel
+{
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+
+    ];
+
+}

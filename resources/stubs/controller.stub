@@ -1,0 +1,131 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Modules\Admin\Http\Controllers\BaseController;
+use App\Utilities\ServiceResponse;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class DummyClass extends BaseController
+{
+
+    /**
+     * @var string
+     */
+    public $moduleTitle = '';
+
+    /**
+     * @var string
+     */
+    public $viewFolderName = '';
+
+    /**
+     * DummyClass constructor.
+     */
+    public function __construct
+    (
+    )
+    {
+        parent::__construct();
+        $this->repository = $repository;
+        $this->successCreateText = $this->moduleTitle . $this->successCreateText;
+        $this->successUpdateText = $this->moduleTitle . $this->successUpdateText;
+        $this->successDeleteText = $this->moduleTitle . $this->successDeleteText;
+        $this->data['moduleKey'] = '';
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $this->data['allData'] = $this->repository->paginate();
+
+        return view($this->baseModuleName   . $this->baseAdminViewName . $this->viewFolderName.'.index', $this->data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.create', $this->data);
+    }
+
+    /**
+     * @param CreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+
+        try {
+
+            $this->repository->create($request->except('_token'));
+
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
+        }
+
+        return redirect()->back()->with('notifications', ServiceResponse::notification($this->successCreateText, 'success'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $this->data['data'] = $this->repository->find($id);
+
+        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.edit', $this->data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  CreateRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+        try {
+
+            $this->repository->update($request->except('_token'),$id);
+
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
+        }
+
+        return redirect()->back()->with('notifications', ServiceResponse::notification($this->successUpdateText, 'success'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        try {
+            $this->repository->delete($id);
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
+        }
+
+        return redirect()->back()->with('notifications', ServiceResponse::notification($this->successUpdateText, 'success'));
+    }
+
+}

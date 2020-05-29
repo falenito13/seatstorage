@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\ImportTexts;
+use App\Console\Commands\MakeControllerCommand;
+use App\Console\Commands\MakeModuleCommand;
 use App\Utilities\ModuleHelper;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -33,6 +35,8 @@ class Kernel extends ConsoleKernel
 
             $this->commands = array_merge($this->commands, $orderCommands);
         }
+
+        $this->commands = array_merge($this->commands, [MakeModuleCommand::class]);
 
     }
 

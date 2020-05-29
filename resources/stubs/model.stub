@@ -1,0 +1,47 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Modules\Admin\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+use Astrotomic\Translatable\Translatable;
+
+class DummyClass extends BaseModel implements TranslatableContract
+{
+
+    use SoftDeletes,Translatable;
+
+    /**
+     * @var string
+     */
+    protected $table = '';
+
+    /**
+     * @var string
+     */
+    protected $translationModel = 'App\Modules\Core\Models\Translations\\';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+
+    ];
+
+    /**
+     * @var array
+     */
+    public $translatedAttributes = [
+
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
+
+}
