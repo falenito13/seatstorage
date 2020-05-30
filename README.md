@@ -1,6 +1,7 @@
 # Tazo Base project
 
-### ინსტალაციის ინსტრუქცია
+
+# ინსტალაციის ინსტრუქცია
 
 ###### პროექტის clone-ის შემდეგ გასაშვები ბრძანებების მიმდევრობა:
 
@@ -19,6 +20,8 @@
 7. php artisan migrate
 8. php artisan db:seed
 9. php artisan storage:link
+10. npm install
+11. npm install production
 ```
 
 ## პროექტის პირველად დაყენებისას გასაშვების დამხამრე ბრძანებები
@@ -39,3 +42,37 @@
 ```
 php artisan import:text 
 ```
+
+# 
+
+# ყოველი ახალი ვერსიის დროს გასაშვები ბრძანებები
+
+###### ძირითადი ბრძანებების ჩამონათვალი.
+```blade
+1. composer install
+2. php artisan module:optimize
+3. php artisan migrate
+4. php artisan db:seed
+5. npm install
+6. npm install production
+```
+
+#### დამხმარე ბრძანებები ყოველი განახლებისას.
+
+###### დაიმპორტდება ყველა არსებული სამართვაბი პანელის ტექსტები ბაზაში და ფაილში.
+
+```
+php artisan import:text:db
+```
+
+# 
+
+# მოდულში კომპონენტის შექმნა
+
+###### moduleName - მოდულის key (მაგ: admin)
+###### componentName - კომპონენტის სახელი რასაც ვქმნით (მაგ: Person). 
+###### --lang= თუკი გვინდა შეიქმნას translate მოდელიც, გადაეცით --lang=1 თუ არადა --lang=0
+```
+php artisan makeComponent moduleName componentName --lang=1
+```
+

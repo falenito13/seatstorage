@@ -7,11 +7,12 @@ use App\Modules\Admin\Models\BaseModel;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use \App\Console\Commands\Traits\Command as TraitCommand;
 
 class MakeModuleCommand extends Command
 {
 
-    use \App\Console\Commands\Traits\Command;
+    use TraitCommand;
 
     /**
      * The name and signature of the console command.
