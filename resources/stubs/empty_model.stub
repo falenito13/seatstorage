@@ -1,0 +1,33 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyBaseModel as BaseModel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class DummyClass extends BaseModel
+{
+
+    use SoftDeletes;
+
+    /**
+     * @var string
+     */
+    protected $table = 'DummyTableName';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+
+    ];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at'
+    ];
+
+}

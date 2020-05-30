@@ -3,17 +3,15 @@
 namespace DummyNamespace;
 
 use App\Repositories\Eloquent\BaseRepository;
-use Illuminate\Database\Eloquent\Model;
+use DummyImplementRepositoryInterface as IRepository;
+use DummyBaseModel as RepositoryModel;
 
-class DummyClass extends BaseRepository implements
+class DummyClass extends BaseRepository implements IRepository
 {
 
-    /**
-     * EthnicGroupRepository constructor.
-     */
     public function __construct
     (
-         $model
+         RepositoryModel $model
     )
     {
         parent::__construct($model);

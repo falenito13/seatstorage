@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use App\Modules\Admin\Models\BaseModel;
+use DummyBaseModel as BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -16,12 +16,12 @@ class DummyClass extends BaseModel implements TranslatableContract
     /**
      * @var string
      */
-    protected $table = '';
+    protected $table = 'DummyTableName';
 
     /**
      * @var string
      */
-    protected $translationModel = 'App\Modules\Core\Models\Translations\\';
+    protected $translationModel = DummyTranslatableModel::class;
 
     /**
      * @var array

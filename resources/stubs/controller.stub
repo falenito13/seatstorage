@@ -2,10 +2,12 @@
 
 namespace DummyNamespace;
 
-use App\Modules\Admin\Http\Controllers\BaseController;
 use App\Utilities\ServiceResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DummyCreateRequest as CreateRequest;
+use DummyModuleRepository as ModuleRepository;
+use DummyBaseController as BaseController;
 
 class DummyClass extends BaseController
 {
@@ -13,18 +15,19 @@ class DummyClass extends BaseController
     /**
      * @var string
      */
-    public $moduleTitle = '';
+    public $moduleTitle = 'DummyModuleKey';
 
     /**
      * @var string
      */
-    public $viewFolderName = '';
+    public $viewFolderName = 'DummyModuleKey';
 
     /**
      * DummyClass constructor.
      */
     public function __construct
     (
+        ModuleRepository $repository
     )
     {
         parent::__construct();
@@ -32,7 +35,7 @@ class DummyClass extends BaseController
         $this->successCreateText = $this->moduleTitle . $this->successCreateText;
         $this->successUpdateText = $this->moduleTitle . $this->successUpdateText;
         $this->successDeleteText = $this->moduleTitle . $this->successDeleteText;
-        $this->data['moduleKey'] = '';
+        $this->data['moduleKey'] = 'DummyModuleKey';
     }
 
 
@@ -63,7 +66,7 @@ class DummyClass extends BaseController
      * @param CreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
 
         try {
@@ -97,7 +100,7 @@ class DummyClass extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateRequest $request, $id)
     {
 
         try {

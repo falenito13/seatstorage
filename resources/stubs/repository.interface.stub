@@ -1,6 +1,5 @@
 <?php
 
-
 namespace DummyNamespace;
 
 use App\Repositories\IBaseRepository;

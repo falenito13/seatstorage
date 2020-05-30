@@ -1,11 +1,12 @@
 <?php
 
+
 namespace App\Console\Commands\Make;
 
-use Illuminate\Console\Command;
+
 use Illuminate\Console\GeneratorCommand;
 
-class MakeRepositoryCommand extends GeneratorCommand
+class MakeEmptyModelCommand extends GeneratorCommand
 {
 
     /**
@@ -13,19 +14,17 @@ class MakeRepositoryCommand extends GeneratorCommand
      *
      * @var string
      */
-//    protected $name = 'makeModule:repository';
-
-    protected $signature = 'makeModule:repository
-    	{name : The name of the controller class}
-    	{--interface=} 
-    	{--model=}';
+    protected $signature = 'makeModule:empty-model 
+    {name : The name of the controller class}
+    {--table=}
+    {--base_model=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new a repository';
+    protected $description = 'Create a new a model';
 
     /**
      * The type of class being generated.
@@ -41,7 +40,7 @@ class MakeRepositoryCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return resource_path('stubs/repository.stub');
+        return resource_path('stubs/empty_model.stub');
     }
 
     /**
@@ -67,8 +66,12 @@ class MakeRepositoryCommand extends GeneratorCommand
     {
 
         $stub = str_replace(
-            ['DummyNamespace', 'DummyImplementRepositoryInterface', 'DummyBaseModel'],
-            [$this->getNamespace($name),  str_replace( '-', '\\',$this->option('interface')), str_replace( '-', '\\',$this->option('model'))],
+            ['DummyNamespace', 'DummyBaseModel', 'DummyTableName'],
+            [
+                $this->getNamespace($name),
+                str_replace( '-', '\\',$this->option('base_model')),
+                $this->option('table')
+            ],
             $stub
         );
 
