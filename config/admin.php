@@ -38,5 +38,26 @@ return [
     'admin_user_name'           => env('ADMIN_USER_EMAIL', 'tazo@github.ge'),
     'admin_user_password'       => env('ADMIN_USER_PASSWORD', ''),
 
+    /**
+     * Image upload config.
+     */
+    'image'         => [
+
+        /**
+         * Enable or disable upload resolutions.
+         */
+        'upload_resolutions'    => env('UPLOAD_IMAGE_RESOLUTIONS', true),
+
+        /**
+         * Resolution list.
+         */
+        'resolutions'   => [
+            600,
+            1200,
+            1800
+        ]
+
+    ]
+
 
 ];

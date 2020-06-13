@@ -8,7 +8,6 @@ use Illuminate\Console\GeneratorCommand;
 
 class MakeHelperCommand extends GeneratorCommand
 {
-
     /**
      * The console command name.
      *

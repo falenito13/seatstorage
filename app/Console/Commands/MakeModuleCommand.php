@@ -95,7 +95,7 @@ class MakeModuleCommand extends Command
             // Controller
             Artisan::call('makeModule:controller Modules/' . ucfirst($moduleName)  . '/Http/Controllers/Admin/'.$componentName . 'Controller '
             . ' --key=' . Str::lower($componentName)
-            . ' --repository=App-' .str_replace('/', "-", $repositoryClass)
+            . ' --repository=App-' .str_replace('/', "-", $repositoryInterfaceClass)
             . ' --base_controller=-' . str_replace('\\', "-", BaseController::class)
             . ' --create_request=App-' . str_replace('/', "-", $requestClass)
             );

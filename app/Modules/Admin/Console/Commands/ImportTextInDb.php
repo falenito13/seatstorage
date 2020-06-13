@@ -5,6 +5,7 @@ namespace App\Modules\Admin\Console\Commands;
 
 
 use App\Console\Commands\Traits\Command as TraitCommand;
+use App\Modules\Admin\Helper\FileHelper;
 use App\Modules\Admin\Helper\ProfileHelper;
 use App\Modules\Admin\Helper\RoleHelper;
 use App\Modules\Admin\Helper\TextHelper;
@@ -67,7 +68,13 @@ class ImportTextInDb extends Command
 
             app()->setLocale($locale);
 
-            $langTexts = array_merge(TextHelper::getLang(), RoleHelper::getLang(), ProfileHelper::getLang(),UserHelper::getLang());
+            $langTexts = array_merge(
+                TextHelper::getLang(),
+                RoleHelper::getLang(),
+                ProfileHelper::getLang(),
+                UserHelper::getLang(),
+                FileHelper::getLang()
+            );
 
             foreach($langTexts as $langText) {
 

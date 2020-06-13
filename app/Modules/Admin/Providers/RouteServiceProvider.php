@@ -36,14 +36,11 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapWebRoutes();
-
         $this->mapApiRoutes();
-
         $this->mapAuthRoutes();
-
         $this->mapUserRoutes();
-
         $this->mapRoleRoutes();
+        $this->mapFileRoutes();
     }
 
     /**
@@ -94,6 +91,23 @@ class RouteServiceProvider extends ServiceProvider
             'namespace'  => $this->namespace,
         ], function ($router) {
             require module_path('admin', 'Routes/auth.php', 'app');
+        });
+    }
+
+    /**
+     * Define the "file" routes for the module.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapFileRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace'  => $this->namespace,
+        ], function ($router) {
+            require module_path('admin', 'Routes/file.php', 'app');
         });
     }
 

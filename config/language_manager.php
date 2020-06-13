@@ -1,8 +1,6 @@
 <?php
 
-
 return [
-
     /**
      * Language ignore import file list.
      */
@@ -12,12 +10,11 @@ return [
 //        'passwords',
         'validation',
     ],
-
     /**
      * All locales.
      */
     'locales'   => [
         'en'
-    ]
-
+    ],
+    'default_locale'    => 'en'
 ];

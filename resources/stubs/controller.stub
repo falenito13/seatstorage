@@ -35,7 +35,7 @@ class DummyClass extends BaseController
         $this->successCreateText = $this->moduleTitle . $this->successCreateText;
         $this->successUpdateText = $this->moduleTitle . $this->successUpdateText;
         $this->successDeleteText = $this->moduleTitle . $this->successDeleteText;
-        $this->data['moduleKey'] = 'DummyModuleKey';
+        $this->baseData['moduleKey'] = 'DummyModuleKey';
     }
 
 
@@ -47,9 +47,9 @@ class DummyClass extends BaseController
      */
     public function index(Request $request)
     {
-        $this->data['allData'] = $this->repository->paginate();
+        $this->baseData['allData'] = $this->repository->paginate();
 
-        return view($this->baseModuleName   . $this->baseAdminViewName . $this->viewFolderName.'.index', $this->data);
+        return view($this->baseModuleName   . $this->baseAdminViewName . $this->viewFolderName.'.index', $this->baseData);
     }
 
     /**
@@ -59,7 +59,7 @@ class DummyClass extends BaseController
      */
     public function create()
     {
-        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.create', $this->data);
+        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.create', $this->baseData);
     }
 
     /**
@@ -88,9 +88,9 @@ class DummyClass extends BaseController
      */
     public function edit($id)
     {
-        $this->data['data'] = $this->repository->find($id);
+        $this->baseData['data'] = $this->repository->find($id);
 
-        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.edit', $this->data);
+        return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.edit', $this->baseData);
     }
 
     /**

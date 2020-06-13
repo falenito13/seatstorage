@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageServiceProvider;
 use OwenIt\Auditing\AuditingServiceProvider;
 
 return [
@@ -187,6 +189,7 @@ return [
         OwenIt\Auditing\AuditingServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -238,6 +241,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

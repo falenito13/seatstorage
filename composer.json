@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "astrotomic/laravel-translatable": "^11.8",
         "barryvdh/laravel-debugbar": "^3.3",
         "barryvdh/laravel-dompdf": "^0.8.6",
         "barryvdh/laravel-translation-manager": "^0.5.8",
@@ -18,6 +19,7 @@
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.5",
+        "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "owen-it/laravel-auditing": "^10.0",

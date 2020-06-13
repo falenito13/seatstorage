@@ -42,6 +42,10 @@ return [
      */
     'role'     => [
         'default'   => $default_permissions
+    ],
+
+    'test'      => [
+        'default'   => $default_permissions
     ]
 
 ];

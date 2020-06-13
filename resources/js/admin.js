@@ -7,14 +7,14 @@ require('./bootstrap');
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import { VueEditor, Quill } from "vue2-editor";
 import { Pagination } from 'element-ui';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 import elementLocale from 'element-ui/lib/locale/lang/en';
 
 Vue.use(Pagination);
 Vue.use(ElementUI, { locale: elementLocale });
-Vue.use(VueEditor);
+Vue.use(CKEditor);
 
 window.Vue = require('vue');
 
@@ -41,6 +41,9 @@ Vue.component('admin-role-save-component', require('./admin/role/page/SaveCompon
 
 //Base Component
 Vue.component('delete-component', require('./components/admin/Delete').default);
+
+//Test
+Vue.component('test-save-component', require('./admin/test/SaveComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
