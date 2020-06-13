@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="{{ asset('admin_resources/css/main.css')}}">
 
-<link id="theme-link" rel="stylesheet" href="{{ asset('admin_resources/css/themes/flatie.css')}}">
+<link id="theme-link" rel="stylesheet" href="{{ asset('admin_resources/css/themes/custom.css')}}">
 
 <link rel="stylesheet" href="{{ asset('admin_resources/css/themes.css')}}">
 
@@ -14,12 +14,7 @@
 <script src="{{ asset('admin_resources/js/vendor/bootstrap.min.js')}}"></script>
 <script src="{{ asset('admin_resources/js/classes/Modal.js')}}"></script>
 <script src="{{ asset('admin_resources/js/plugins.js')}}"></script>
-<script src="{{ asset('admin_resources/js/jquery.multifield.min.js')}}"></script>
-<script src="{{ asset('admin_resources/js/libs/jquery.repeater.min.js')}}"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <script src="{{ asset('admin_resources/packages/colorbox/jquery.colorbox-min.js') }}"></script>
-<script src="{{ asset('admin_resources/js/vendor/repeater.js')}}"></script>
 
 <script src="{{ asset('admin_resources/js/script.js')}}"></script>
 

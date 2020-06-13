@@ -11,7 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin'], 'namespace' 
     /**
      * Login method.
      */
-    Route::post('login', 'LoginController@login')
+    Route::post('', 'LoginController@login')
         ->name('admin.login');
 
 });

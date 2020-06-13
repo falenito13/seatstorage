@@ -25,8 +25,8 @@
                             </div>
                             <div class="sidebar-user-name">{{ \Auth::user()->name }}</div>
                             <div class="sidebar-user-links">
-                                <a href="{{ route('admin.profile.index') }}" data-toggle="tooltip" data-placement="bottom" title="პროფილი"><i class="gi gi-user"></i></a>
-                                <a href="javascript:;" class="logout-link" data-toggle="tooltip" data-placement="bottom" title="გასვლა"><i class="gi gi-exit"></i></a>
+                                <a href="{{ route('admin.profile.index') }}" data-toggle="tooltip" data-placement="bottom" title="პროფილი"><i class="el-icon-user"></i></a>
+                                <a href="javascript:;" class="logout-link" data-toggle="tooltip" data-placement="bottom" title="გასვლა"><i class="el-icon-switch-button"></i></a>
                             </div>
                         </div>
                         <!-- END User Info -->
@@ -62,16 +62,16 @@
                         <!-- User Dropdown -->
                         <li class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ config('admin.user_avatar') }}" alt="avatar"> <i class="fa fa-angle-down"></i>
+                                <i class="el-icon-more-outline"></i> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                                <li class="dropdown-header text-center">ჩემი ანგარიში</li>
+                                <li class="dropdown-header text-center">My Account</li>
                                 <li>
                                     <a href="{{ route('admin.profile.index') }}">
-                                        <i class="fa fa-user fa-fw pull-right"></i>
-                                        პროფილი
+                                        <i class="el-icon-user pull-right"></i>
+                                        profile
                                     </a>
-                                    <a href="javascript:;" class="logout-link"><i class="fa fa-ban fa-fw pull-right"></i> გასვლა</a>
+                                    <a href="javascript:;" class="logout-link"><i class="el-icon-switch-button pull-right"></i> logout</a>
                                     <form action="{{ route('admin.logout') }}" id="logout-form" method="post" style="display: none;">
                                         {{csrf_field()}}
                                         <button type="submit"></button>
