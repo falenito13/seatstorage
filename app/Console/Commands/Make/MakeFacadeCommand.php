@@ -1,11 +1,12 @@
 <?php
 
+
 namespace App\Console\Commands\Make;
 
-use Illuminate\Console\Command;
+
 use Illuminate\Console\GeneratorCommand;
 
-class MakeRepositoryCommand extends GeneratorCommand
+class MakeFacadeCommand extends GeneratorCommand
 {
 
     /**
@@ -13,19 +14,16 @@ class MakeRepositoryCommand extends GeneratorCommand
      *
      * @var string
      */
-//    protected $name = 'makeModule:repository';
-
-    protected $signature = 'makeModule:repository
-    	{name : The name of the controller class}
-    	{--model_namespace=} 
-    	{--model=}';
+    protected $signature = 'make:facade
+    	{name : The name of the facade class} 
+    	{--class=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new a repository';
+    protected $description = 'Create a new a facade';
 
     /**
      * The type of class being generated.
@@ -41,7 +39,7 @@ class MakeRepositoryCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return resource_path('stubs/repository_new.stub');
+        return resource_path('stubs/facade.stub');
     }
 
     /**
@@ -65,10 +63,9 @@ class MakeRepositoryCommand extends GeneratorCommand
      */
     protected function replaceNamespace(&$stub, $name)
     {
-
         $stub = str_replace(
-            ['DummyNamespace', 'DummyBaseModelNamespace', 'DummyBaseModel'],
-            [$this->getNamespace($name),  str_replace( '-', '\\',$this->option('model_namespace')), str_replace( '-', '\\',$this->option('model'))],
+            ['DummyNamespace', 'DummyFacadeName'],
+            [$this->getNamespace($name),  $this->option('class')],
             $stub
         );
 

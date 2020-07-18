@@ -12,7 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.dashboard');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -26,12 +26,8 @@ class DummyClass extends BaseController
      * DummyClass constructor.
      */
     public function __construct
-    (
-        ModuleRepository $repository
-    )
     {
         parent::__construct();
-        $this->repository = $repository;
         $this->successCreateText = $this->moduleTitle . $this->successCreateText;
         $this->successUpdateText = $this->moduleTitle . $this->successUpdateText;
         $this->successDeleteText = $this->moduleTitle . $this->successDeleteText;
@@ -47,7 +43,7 @@ class DummyClass extends BaseController
      */
     public function index(Request $request)
     {
-        $this->baseData['allData'] = $this->repository->paginate();
+        $this->baseData['allData'] = ModuleRepository::paginate(25);
 
         return view($this->baseModuleName   . $this->baseAdminViewName . $this->viewFolderName.'.index', $this->baseData);
     }
@@ -68,10 +64,8 @@ class DummyClass extends BaseController
      */
     public function store(CreateRequest $request)
     {
-
         try {
-
-            $this->repository->create($request->except('_token'));
+            ModuleRepository::create($request->except('_token'));
 
         } catch (\Exception $ex) {
             return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
@@ -88,7 +82,7 @@ class DummyClass extends BaseController
      */
     public function edit($id)
     {
-        $this->baseData['data'] = $this->repository->find($id);
+        $this->baseData['data'] = ModuleRepository::findOrFail($id);
 
         return view($this->baseModuleName  . $this->baseAdminViewName . $this->viewFolderName.'.edit', $this->baseData);
     }
@@ -102,11 +96,8 @@ class DummyClass extends BaseController
      */
     public function update(CreateRequest $request, $id)
     {
-
         try {
-
-            $this->repository->update($request->except('_token'),$id);
-
+            ModuleRepository::update($request->except('_token'),$id);
         } catch (\Exception $ex) {
             return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
         }
@@ -123,7 +114,7 @@ class DummyClass extends BaseController
     public function destroy($id)
     {
         try {
-            $this->repository->delete($id);
+            ModuleRepository::findOrFail($id)->delete($id);
         } catch (\Exception $ex) {
             return redirect()->back()->with('notifications', ServiceResponse::notification($ex->getMessage(), 'danger'))->withInput();
         }

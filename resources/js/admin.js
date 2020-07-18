@@ -5,6 +5,7 @@
  */
 require('./bootstrap');
 
+import store from './store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Pagination } from 'element-ui';
@@ -41,6 +42,10 @@ Vue.component('admin-role-save-component', require('./admin/role/page/SaveCompon
 
 //Base Component
 Vue.component('delete-component', require('./components/admin/Delete').default);
+Vue.component('checkbox-list-component', require('./components/admin/checkboxList').default);
+Vue.component('checked-all-component', require('./components/admin/checkedAll').default);
+Vue.component('xml-export-component', require('./components/admin/xmlExport').default);
+Vue.component('per-page-component', require('./components/admin/perPage').default);
 
 //Test
 Vue.component('test-save-component', require('./admin/test/SaveComponent').default);
