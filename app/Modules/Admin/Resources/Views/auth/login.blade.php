@@ -9,19 +9,24 @@
             <!-- Login Title -->
 
             <div class="login-title text-center">
-                <img src="{{asset('img/baza-logo-white-cms.svg')}}" alt="" style="width: 100px;">
+                <div  class="logo">
+                    @foreach(config('admin.login_logo') as $logo)
+                        <img src="{{ $logo['src'] }}" alt="" style="{{ $logo['style'] }}">
+                    @endforeach
+                </div>
 
                 <div>
-                    <h1><strong class="title-bold">WEB</strong></h1>
-                    <ul class="page-list regular">
-                        <li><a href="#" target="_blank">Home</a></li>
-                        <li><a href="#" target="_blank">Projects</a></li>
-                        <li><a href="#" target="_blank">Media</a></li>
-                        <li><a href="#" target="_blank">About</a></li>
-                    </ul>
+                    @if(count(config('admin.login_web_modules')))
+                    <h1><strong class="title-bold">@lang('WEB')</strong></h1>
+                        <ul class="page-list regular">
+                            @foreach(config('admin.login_web_modules') as $webModule)
+                                <li><a href="{{ $webModule['url'] }}" target="_blank">{{ $webModule['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
 
                 </div>
-                <h1><strong class="title-black">{{ config('admin.project_name') }} v.0</strong></h1>
+                <h1><strong class="title-black">{{ config('admin.project_name') }} {{ config('admin.version') }}</strong></h1>
             </div>
 
             <!-- END Login Title -->
@@ -67,7 +72,14 @@
                                 </label>
                             </div>
                             <div class="col-xs-8 text-right">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to dashboard
+                                <button type="submit"
+                                        @if(config('admin.recaptcha.modules.login.status'))
+                                        data-callback='onSubmit'
+                                        data-sitekey="{{ config('admin.recaptcha.public_key') }}"
+                                        @endif
+                                        class="btn btn-sm btn-primary @if(config('admin.recaptcha.modules.login.status')) g-recaptcha @endif">
+                                    <i class="fa fa-angle-right"></i>
+                                    Login to dashboard
                                 </button>
                             </div>
                         </div>
@@ -90,11 +102,10 @@
 @endsection
 
 @section('footer_scripts')
-    <!-- Load and execute javascript code used only in this page -->
-    <script src="{{ asset('admin_resources/js/pages/login.js')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        $(function () {
-            Login.init();
-        });
+        function onSubmit(token) {
+            document.getElementById("form-login").submit();
+        }
     </script>
 @endsection

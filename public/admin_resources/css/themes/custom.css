@@ -506,7 +506,7 @@ fieldset[disabled] .btn-primary.active:focus {
   font-size: 14px!Important;
   vertical-align: middle;
 }
-button.el-button.el-button--primary:not(.is-plain),
+button.el-button.el-button--primary:not(.is-plain)
 {
   background-color: #3855f7!Important;
   border-color: #0020d9!Important;
@@ -754,4 +754,8 @@ padding: 60px;
   .login-title.text-center > img {
     display: none;
   }
+}
+
+.login-title .logo {
+    display: flex;
 }

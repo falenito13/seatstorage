@@ -7,6 +7,8 @@ return [
      */
     'handcrafted_by'        => 'Tazo Mindiashvili',
 
+    'version'               => 'v.1',
+
     /**
      * Handcrafted member url.
      */
@@ -15,7 +17,7 @@ return [
     /**
      * Admin user avatar url.
      */
-    'user_avatar'           => 'admin_resources/img/placeholders/avatars/avatar2.jpg',
+    'user_avatar'           => 'admin_resources/img/placeholders/avatars/avatar_tazo.jpg',
 
     /**
      * Project name.
@@ -31,6 +33,32 @@ return [
      * Login background image url
      */
     'login_background_image'    => 'admin_resources/img/placeholders/headers/login_header.jpg',
+
+    /**
+     * Login page logo.
+     */
+    'login_logo'                => [
+        [
+            'src'       => '/img/baza-logo-white-cms.svg',
+            'style'     => 'width: 100px'
+        ]
+    ],
+
+
+    /**
+     * Recaptcha config.
+     */
+    'recaptcha'             => [
+        'modules'     => [
+            'login' => [
+                'status'    => env('RECAPTCHA_MODULE_LOGIN_STATUS', true)
+            ]
+        ],
+        'secret_key'    => env('RECAPTCHA_SECRET_KEY','6Ld9P7MZAAAAABVFd6wxIZq25YHwRQqX1xPCmeG8'),
+        'public_key'    => env('RECAPTCHA_PUBLIC_KEY', '6Ld9P7MZAAAAABTzd1xQY2XkL8H6wT7nKxjb6tGN')
+    ],
+
+    'login_web_modules'     => [],
 
     /**
      * Admin user

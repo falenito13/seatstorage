@@ -7,7 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
+ * App\Modules\Admin\Models\Statics\File
+ *
  * @property mixed src
+ * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
+ * @property-read int|null $audits_count
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $fileable
+ * @property-read string $full_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\Admin\Models\Statics\File newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\Admin\Models\Statics\File newQuery()
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\Admin\Models\Statics\File onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\Admin\Models\Statics\File query()
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\Admin\Models\Statics\File withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Modules\Admin\Models\Statics\File withoutTrashed()
+ * @mixin \Eloquent
  */
 class File extends BaseModel
 {

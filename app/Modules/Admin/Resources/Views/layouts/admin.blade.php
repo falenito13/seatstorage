@@ -20,7 +20,7 @@
                         <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                             <div class="sidebar-user-avatar">
                                 <a href="{{ route('admin.profile.index') }}">
-                                    <img src="{{ config('admin.project_avatar') }}" alt="avatar">
+                                    <img src="{{ config('admin.user_avatar') }}" alt="avatar">
                                 </a>
                             </div>
                             <div class="sidebar-user-name">{{ \Auth::user()->name }}</div>

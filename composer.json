@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "ext-simplexml": "*",
         "astrotomic/laravel-translatable": "^11.8",
         "barryvdh/laravel-debugbar": "^3.3",
         "barryvdh/laravel-dompdf": "^0.8.6",
@@ -18,14 +19,14 @@
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
+        "google/recaptcha": "^1.2",
         "guzzlehttp/guzzle": "^6.5",
         "intervention/image": "^2.5",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "owen-it/laravel-auditing": "^10.0",
         "rap2hpoutre/laravel-log-viewer": "^1.6",
-        "spatie/laravel-permission": "^3.13",
-        "ext-simplexml": "*"
+        "spatie/laravel-permission": "^3.13"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",

@@ -21,7 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['guest:admin'], 'namespace' 
     /**
      * Logout method.
      */
-    Route::get('logout', 'LoginController@logout')
+    Route::post('logout', 'LoginController@logout')
         ->name('admin.logout');
 
 });
