@@ -76,3 +76,10 @@ php artisan import:text:db
 php artisan makeComponent moduleName componentName --lang=1
 ```
 
+## Google Recaptcha v2(Invisible) კონფიგურაცია
+```
+    env('RECAPTCHA_MODULE_LOGIN_STATUS'),
+    env('RECAPTCHA_SECRET_KEY'),
+    env('RECAPTCHA_PUBLIC_KEY')
+```
+
