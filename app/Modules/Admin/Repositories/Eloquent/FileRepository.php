@@ -8,7 +8,8 @@ use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+use Image;
+use Storage;
 
 /**
  * @property UploadedFile uploadedFile
@@ -93,10 +94,7 @@ class FileRepository extends BaseRepository implements IFileRepository
      */
     public function uploadFile()
     {
-
-        /**
-         * @var $type string
-         */
+        /** @var $type string */
         $type = $this->request->get('type');
 
         // Save Original.
@@ -126,8 +124,7 @@ class FileRepository extends BaseRepository implements IFileRepository
             /**
              * @var $img \Intervention\Image\Image
              */
-            $file = \Image::make($this->file)->resize($resolution, null, function ($constraint)
-            {
+            $file = Image::make($this->file)->resize($resolution, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 

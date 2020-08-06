@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.20.0 on 2020-07-19 17:32:47.
+ * Generated for Laravel 7.20.0 on 2020-08-06 15:45:35.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15166,6 +15166,72 @@ namespace Intervention\Image\Facades {
  
 }
 
+namespace App\Modules\Base\Facades\Repositories { 
+
+    /**
+     * 
+     *
+     */ 
+    class TestRepositoryFacade {
+        
+        /**
+         * Get the associated model
+         *
+         * @return \App\Repositories\Eloquent\Model 
+         * @static 
+         */ 
+        public static function getModel()
+        {
+            //Method inherited from \App\Repositories\Eloquent\BaseRepository            
+                        /** @var \App\Modules\Base\Repositories\Eloquent\TestRepository $instance */
+                        return $instance->getModel();
+        }
+        
+        /**
+         * Set the associated model
+         *
+         * @param $model
+         * @return \App\Modules\Base\Repositories\Eloquent\TestRepository 
+         * @static 
+         */ 
+        public static function setModel($model)
+        {
+            //Method inherited from \App\Repositories\Eloquent\BaseRepository            
+                        /** @var \App\Modules\Base\Repositories\Eloquent\TestRepository $instance */
+                        return $instance->setModel($model);
+        }
+        
+        /**
+         * 
+         *
+         * @param $filter
+         * @return mixed 
+         * @static 
+         */ 
+        public static function adminFilter($filter)
+        {
+            //Method inherited from \App\Repositories\Eloquent\BaseRepository            
+                        /** @var \App\Modules\Base\Repositories\Eloquent\TestRepository $instance */
+                        return $instance->adminFilter($filter);
+        }
+        
+        /**
+         * 
+         *
+         * @param $user
+         * @static 
+         */ 
+        public static function setUser($user)
+        {
+            //Method inherited from \App\Repositories\Eloquent\BaseRepository            
+                        /** @var \App\Modules\Base\Repositories\Eloquent\TestRepository $instance */
+                        return $instance->setUser($user);
+        }
+         
+    }
+ 
+}
+
 namespace Barryvdh\Debugbar { 
 
     /**
@@ -19447,6 +19513,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Image extends \Intervention\Image\Facades\Image {}
+
+    class TestRepository extends \App\Modules\Base\Facades\Repositories\TestRepositoryFacade {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 

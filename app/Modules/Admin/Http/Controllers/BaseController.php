@@ -65,6 +65,35 @@ class BaseController extends Controller
         $this->baseData['editor_config'] = config('editor.config');
         $this->baseData['editor_config']['upload_editor'] = route('admin.file.upload_editor');
         $this->baseData['file_upload_url'] = route('admin.file.upload');
+        $this->baseData['form'] = config('form');
     }
+
+    /**
+     * Generate create data.
+     */
+    public function generateCreateData()
+    {
+        $item = null;
+        if (!empty($this->baseData['item'])) {
+            $item = $this->baseData['item'];
+        }
+
+        foreach($this->baseData['fields'] as $key => $field) {
+            if ($field['type'] == config('form.fields.types.select_multiple.name') && $item) {
+                $this->baseData['values'][$field['name']]   = $item->{$field['name']}->pluck('id')->toArray();
+            } else if (array_key_exists('default_value', $field)) {
+                $this->baseData['values'][$field['name']]   = $field['default_value'];
+            } else {
+                $this->baseData['values'][$field['name']]   = '';
+            }
+        }
+
+        if ($item) {
+            $this->baseData['values']['id'] = $item->id;
+        }
+
+    }
+
+
 
 }

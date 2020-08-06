@@ -25,7 +25,7 @@ class DummyClass extends BaseController
     /**
      * DummyClass constructor.
      */
-    public function __construct
+    public function __construct()
     {
         parent::__construct();
         $this->successCreateText = $this->moduleTitle . $this->successCreateText;

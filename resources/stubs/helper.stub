@@ -16,11 +16,11 @@ class DummyClass
         $baseName = $baseRouteName . '.' . $baseModuleName . '.';
 
         return [
-  'create'            => route($baseName . 'create'),
-             'save'              => route($baseName . 'store'),
-             'create_data'       => route($baseName . 'create_data'),
-             'edit'              => route($baseName . 'edit', []),
-             'delete'            => route($baseName . 'delete', [])
+               'create'            => route($baseName . 'create'),
+               'save'              => route($baseName . 'store'),
+               'create_data'       => route($baseName . 'create_data'),
+               'edit'              => route($baseName . 'edit', []),
+               'delete'            => route($baseName . 'delete', [])
         ];
     }
 
@@ -35,7 +35,6 @@ class DummyClass
         $baseFullLangName = $baseLangName . '.' . $baseModuleName . '.';
 
         return [
-
             'menu'                      => __($baseFullLangName . 'menu'),
             'index'                     => __($baseFullLangName . 'index'),
             'create'                    => __($baseFullLangName . 'create'),
@@ -46,11 +45,11 @@ class DummyClass
             'save_successfully'         => __($baseFullLangName . 'save_successfully'),
             'delete_successfully'       => __($baseFullLangName . 'delete_successfully'),
             'save_text'                 => __($baseFullLangName . 'save_text'),
-             'confirm_save'              => __($baseFullLangName . 'confirm_save'),
-                        'confirm_save_yes'          => __($baseFullLangName . 'confirm_save_yes'),
-                        'confirm_save_no'           => __($baseFullLangName . 'confirm_save_no'),
+            'confirm_save'              => __($baseFullLangName . 'confirm_save'),
+            'confirm_save_yes'          => __($baseFullLangName . 'confirm_save_yes'),
+            'confirm_save_no'           => __($baseFullLangName . 'confirm_save_no'),
             'name'                      => __($baseFullLangName . 'name'),
-            'description'              => __($baseFullLangName . 'description'),
+            'description'               => __($baseFullLangName . 'description'),
 
         ];
 

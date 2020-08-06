@@ -44,11 +44,10 @@ Vue.component('admin-role-save-component', require('./admin/role/page/SaveCompon
 Vue.component('delete-component', require('./components/admin/Delete').default);
 Vue.component('checkbox-list-component', require('./components/admin/checkboxList').default);
 Vue.component('checked-all-component', require('./components/admin/checkedAll').default);
-Vue.component('xml-export-component', require('./components/admin/xmlExport').default);
 Vue.component('per-page-component', require('./components/admin/perPage').default);
 
 //Test
-Vue.component('test-save-component', require('./admin/test/SaveComponent').default);
+Vue.component('inputs-only-form', require('./base_forms/components/base/InputsOnlyComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

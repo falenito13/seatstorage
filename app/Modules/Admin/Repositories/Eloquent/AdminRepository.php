@@ -8,7 +8,7 @@ use App\Modules\Admin\Repositories\Contracts\IAdminRepository;
 use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class AdminRepository extends BaseRepository implements IAdminRepository
 {
@@ -39,12 +39,11 @@ class AdminRepository extends BaseRepository implements IAdminRepository
      * @param $request
      * @param $user
      * @throws \Exception
+     * @throws \Throwable
      */
     public function updateProfile($request, $user)
     {
-
         try {
-
             DB::beginTransaction();
 
             /**
@@ -75,9 +74,7 @@ class AdminRepository extends BaseRepository implements IAdminRepository
      */
     public function saveData(Request $request)
     {
-
         try {
-
             DB::beginTransaction();
 
             /**
@@ -130,7 +127,7 @@ class AdminRepository extends BaseRepository implements IAdminRepository
      */
     public function filterData($params)
     {
-        return Admin::Filter($params);
+        return Admin::filter($params);
     }
 
     /**
