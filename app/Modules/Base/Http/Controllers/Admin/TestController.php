@@ -200,6 +200,14 @@ class TestController extends BaseController
                         'precision'     => 0
                     ]
                 ],
+                [
+                    'label'             => $this->baseData['trans_text']['name'],
+                    'is_required'       => true,
+                    'name'              => 'multi_image',
+                    'type'              => config('form.fields.types.multi_image.name'),
+                    'placeholder'       => $this->baseData['trans_text']['name'],
+                    'route'             => route('admin.file.upload')
+                ],
             ];
 
             $this->generateCreateData();

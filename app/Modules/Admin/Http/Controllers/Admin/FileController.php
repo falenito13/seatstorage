@@ -47,7 +47,7 @@ class FileController extends BaseController
             }
 
             // Upload file..
-            $this->repository->setFile($request->file('upload'))->setRequest($request)
+            $this->repository->setFile($request->file('file'))->setRequest($request)
                 ->uploadFile();
             // Set file data.
             $file = $this->repository->getFile();

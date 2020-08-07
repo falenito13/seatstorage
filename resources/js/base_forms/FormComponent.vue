@@ -132,6 +132,18 @@
                                                     v-model="form[field.name]"></el-input-number>
                                             </template>
                                         </template>
+                                        <template v-else-if="field.type == 'multi_image'">
+                                            <MultiImageUpload
+                                                :updateData="updateData"
+                                                :lang="lang"
+                                                :upload_image_route="field.route"
+                                                :locales="locales"
+                                                :default_locale="default_locale"
+                                                :module_name="field.name"
+                                                :item="form[field.name]"
+                                                :editor_config="editor_config">
+                                            </MultiImageUpload>
+                                        </template>
                                     </div>
                                 </div>
 
@@ -162,9 +174,10 @@
     import {getData} from '../mixins/getData'
     import MyUploadAdapter from '../mixins/EditorCustomUpload';
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+    import MultiImageUpload from "./MultiImageUpload";
 
     export default {
-        components: {},
+        components: {MultiImageUpload},
         props: [
             'getSaveDataRoute',
             'id',
@@ -196,8 +209,13 @@
         },
 
         methods: {
-            updateData(form){
-                this.form = form;
+            /**
+             *
+             * @param module
+             * @param data
+             */
+            updateData(module, data) {
+                this.form[module] = data;
             },
             modifyCreateData(){
                 this.form = this.values;

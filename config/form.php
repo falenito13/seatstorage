@@ -42,6 +42,9 @@ return [
             'input_number'      => [
                 'name'      => 'input_number'
             ],
+            'multi_image'      => [
+                'name'      => 'multi_image'
+            ],
 
 
         ]

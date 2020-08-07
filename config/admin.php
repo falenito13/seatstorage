@@ -74,7 +74,7 @@ return [
         /**
          * Enable or disable upload resolutions.
          */
-        'upload_resolutions'    => env('UPLOAD_IMAGE_RESOLUTIONS', true),
+        'upload_resolutions'    => env('UPLOAD_IMAGE_RESOLUTIONS', false),
 
         /**
          * Resolution list.
