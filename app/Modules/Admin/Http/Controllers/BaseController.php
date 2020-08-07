@@ -78,13 +78,33 @@ class BaseController extends Controller
             $item = $this->baseData['item'];
         }
 
-        foreach($this->baseData['fields'] as $key => $field) {
-            if ($field['type'] == config('form.fields.types.select_multiple.name') && $item) {
-                $this->baseData['values'][$field['name']]   = $item->{$field['name']}->pluck('id')->toArray();
-            } else if (array_key_exists('default_value', $field)) {
-                $this->baseData['values'][$field['name']]   = $field['default_value'];
-            } else {
-                $this->baseData['values'][$field['name']]   = '';
+        foreach($this->baseData['locales'] as $locale) {
+            foreach($this->baseData['fields'] as $key => $field) {
+                if ($field['type'] == config('form.fields.types.select_multiple.name') && $item) {
+                    if (empty($field['is_translations'])) {
+                        $this->baseData['values'][$field['name']]   = $item->{$field['name']}->pluck('id')->toArray();
+                    } else {
+                        $this->baseData['values'][$locale][$field['name']]   = $item->{$field['name']}->pluck('id')->toArray();
+                    }
+                } else if ($item) {
+                    if (empty($field['is_translations'])) {
+                        $this->baseData['values'][$field['name']]   = $item->translations($locale) ? $item->translations($locale)->{$field['name']} : '';
+                    } else {
+                        $this->baseData['values'][$locale][$field['name']]   = $item->{$field['name']};
+                    }
+                } else if (array_key_exists('default_value', $field)) {
+                    if (empty($field['is_translations'])) {
+                        $this->baseData['values'][$field['name']]   = $field['default_value'];
+                    } else {
+                        $this->baseData['values'][$locale][$field['name']]   = $field['default_value'];
+                    }
+                } else {
+                    if (empty($field['is_translations'])) {
+                        $this->baseData['values'][$field['name']]   = '';
+                    } else {
+                        $this->baseData['values'][$locale][$field['name']]   = '';
+                    }
+                }
             }
         }
 

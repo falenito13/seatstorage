@@ -14,7 +14,8 @@ return [
      * All locales.
      */
     'locales'   => [
-        'en'
+        'en',
+        'ka'
     ],
     'default_locale'    => 'en'
 ];

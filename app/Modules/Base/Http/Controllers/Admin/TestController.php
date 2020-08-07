@@ -88,6 +88,7 @@ class TestController extends BaseController
 
             $this->baseData['fields'] = [
                 [
+                    'is_translations'   => true,
                     'label'             => $this->baseData['trans_text']['name'],
                     'is_required'       => false,
                     'name'              => 'name',
@@ -99,6 +100,7 @@ class TestController extends BaseController
                     ]
                 ],
                 [
+                    'is_translations'   => true,
                     'label'             => $this->baseData['trans_text']['name'],
                     'is_required'       => false,
                     'name'              => 'textarea',

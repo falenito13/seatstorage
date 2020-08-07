@@ -5,10 +5,10 @@
     @include('admin::includes.header-section', ['name'   => $data['trans_text']['create'] ])
         <div class="row">
             <div class="col-xs-12">
-                <inputs-only-form
+                <form-component
                     :editor_config="{{ json_encode($data['editor_config']) }}"
                     :get-save-data-route="'{{ $data['routes']['create_form_data'] }}'">
-                </inputs-only-form>
+                </form-component>
             </div>
         </div>
     </div>
