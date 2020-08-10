@@ -14,55 +14,70 @@
             :before-close="handleClose">
             <div class="demo-drawer__content">
 
-                <el-tabs v-model="activeTabName">
 
-                    <template v-for="locale in locales">
+                <el-tabs v-model="def_locale" v-if="item_field">
+                    <template v-for="(locale,localeKey) in locales">
 
-                        <el-tab-pane :label="lang[locale]" :name="locale">
+                        <el-tab-pane class="" :label="locale" :name="locale">
+                            <template v-for="(field,index) in item_field.inputs">
+                                <div :class="field.class && field.class.form_group ? field.class.form_group : formData.fields.class.form_group_class" v-if="field.is_translations || (!field.is_translations && localeKey == 0)">
+                                    <label :class="field.class && field.class.label ? field.class.label : formData.fields.class.label_class">{{ field.label }} {{ field.is_translations ? locale : '' }}
+                                        <template v-if="field.is_required">
+                                            <span class="text-danger">*</span>:
+                                        </template>
+                                    </label>
+                                    <div :class="field.class && field.class.input_div ? field.class.input_div : formData.fields.class.input_div_class">
 
-                            <el-row>
-                                <el-col :span="24">
-
-                                    <div class="form-group">
-
-                                        <label class="col-md-2 control-label">{{ lang.image_title }} {{ locale }}<span
-                                            class="text-danger">*</span>:</label>
-                                        <div class="col-md-9">
-                                            <el-input class="el-input--is-round"
-                                                      v-model="image_form[locale].title"></el-input>
-                                        </div>
+                                        <template v-if="field.type == 'text'">
+                                            <template v-if="field.is_translations">
+                                                <el-input
+                                                    class="el-input--is-round"
+                                                    :disabled="loading"
+                                                    :placeholder="field.placeholder ? field.placeholder : ''"
+                                                    v-model="image_form[locale][field.name]"></el-input>
+                                            </template>
+                                            <template v-else>
+                                                <el-input
+                                                    class="el-input--is-round"
+                                                    :disabled="loading"
+                                                    :placeholder="field.placeholder ? field.placeholder : ''"
+                                                    v-model="image_form[field.name]"></el-input>
+                                            </template>
+                                        </template>
+                                        <template v-else-if="field.type == 'textarea'">
+                                            <template v-if="field.is_translations">
+                                                <el-input type="textarea" class="el-input--is-round" :disabled="loading" :placeholder="field.placeholder ? field.placeholder : ''"
+                                                          v-model="image_form[locale][field.name]"></el-input>
+                                            </template>
+                                            <template v-else>
+                                                <el-input type="textarea" class="el-input--is-round" :disabled="loading" :placeholder="field.placeholder ? field.placeholder : ''"
+                                                          v-model="image_form[field.name]"></el-input>
+                                            </template>
+                                        </template>
                                     </div>
-                                </el-col>
 
-                                <el-col :span="24" v-if="locale == default_locale">
-
-                                    <div class="form-group">
-
-                                        <label class="col-md-2 control-label">{{ lang.image_url }}<span
-                                            class="text-danger">*</span>:</label>
-                                        <div class="col-md-6">
-                                            <input style="display: block !important;" id="file" ref="file" type="file"
-                                                   v-on:change="handleFileUpload()"/>
-                                        </div>
-
-                                        <div v-if="image_form.url">
-                                            <div class="col-md-offset-2 col-md-6 padding-t">
-                                                <img :src="image_form.url" style="width: 100%;">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </el-col>
-
-                            </el-row>
-
+                                </div>
+                            </template>
                         </el-tab-pane>
 
+                        <div class="form-group" v-if="localeKey == 0">
+
+                            <label class="col-md-2 control-label">{{ lang.image_url }}<span
+                                class="text-danger">*</span>:</label>
+                            <div class="col-md-6">
+                                <input style="display: block !important;" id="file" ref="file" type="file"
+                                       v-on:change="handleFileUpload()"/>
+                            </div>
+
+                            <div v-if="image_form.url">
+                                <div class="col-md-offset-2 col-md-6 padding-t">
+                                    <img :src="image_form.url" style="width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+
                     </template>
-
                 </el-tabs>
-
-
                 <div class="form-group">
                     <div class="col-md-12">
                         <div class="demo-drawer__footer">
@@ -86,14 +101,16 @@
 
     export default {
         props: [
+            'item_field',
             'lang',
             'upload_image_route',
             'locales',
             'default_locale',
             'tab_name',
-            'old_data',
+            'edit_data',
             'options',
-            'updateImageData'
+            'updateImageData',
+            'formData'
         ],
         data() {
             return {
@@ -104,15 +121,14 @@
                     ka: {},
                     en: {},
                     url: ''
-                }
+                },
+                def_locale: this.default_locale
             }
         },
         created() {
             this.dialogVisible = true;
-            // if (this.$store.getters.galleryEditData) {
-            //     let data = this.$store.getters.galleryEditData;
-                this.image_form = data;
-            // }
+            this.image_form = this.edit_data;
+            console.log(this.edit_data,'dsadas');
         },
         methods: {
 
@@ -140,7 +156,7 @@
                         // Response data.
                         let data = response.data;
                         // Set image.
-                        this.image_form.image_id = data.image.id;
+                        this.image_form.image_id = data.file.id;
                     }
                     this.loading = false
                 });

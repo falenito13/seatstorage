@@ -134,6 +134,8 @@
                                         </template>
                                         <template v-else-if="field.type == 'multi_image'">
                                             <MultiImageUpload
+                                                :formData="formData"
+                                                :field="field"
                                                 :updateData="updateData"
                                                 :lang="lang"
                                                 :upload_image_route="field.route"

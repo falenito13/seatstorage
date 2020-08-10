@@ -88,6 +88,42 @@ class TestController extends BaseController
 
             $this->baseData['fields'] = [
                 [
+                    'label'                     => $this->baseData['trans_text']['name'],
+                    'is_required'               => true,
+                    'name'                      => 'multi_image2',
+                    'type'                      => config('form.fields.types.multi_image.name'),
+                    'placeholder'               => $this->baseData['trans_text']['name'],
+                    'route'                     => route('admin.file.upload'),
+                    'has_additional_fields'     => true,
+                    'inputs'                    => [
+                        [
+                            'label'                     => $this->baseData['trans_text']['name'],
+                            'is_required'               => true,
+                            'name'                      => 'name',
+                            'type'                      => config('form.fields.types.text.name'),
+                            'placeholder'               => $this->baseData['trans_text']['name'],
+                            'is_translations'           => false
+                        ],
+                        [
+                            'label'                     => $this->baseData['trans_text']['name'],
+                            'is_required'               => true,
+                            'name'                      => 'name1231',
+                            'type'                      => config('form.fields.types.textarea.name'),
+                            'placeholder'               => $this->baseData['trans_text']['name'],
+                            'is_translations'           => false
+                        ]
+                    ]
+                ],
+                [
+                    'label'                     => $this->baseData['trans_text']['name'],
+                    'is_required'               => true,
+                    'name'                      => 'multi_image1',
+                    'type'                      => config('form.fields.types.multi_image.name'),
+                    'placeholder'               => $this->baseData['trans_text']['name'],
+                    'route'                     => route('admin.file.upload'),
+                    'has_additional_fields'     => false
+                ],
+                [
                     'is_translations'   => true,
                     'label'             => $this->baseData['trans_text']['name'],
                     'is_required'       => false,
@@ -211,6 +247,7 @@ class TestController extends BaseController
             ];
 
             $this->generateCreateData();
+
         } catch (\Exception $ex) {
             return ServiceResponse::jsonNotification($ex->getMessage(), $ex->getCode(), []);
         }

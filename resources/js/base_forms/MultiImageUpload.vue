@@ -33,9 +33,9 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
 
-                <draggable tag="div" :list="form.images" handle=".handle">
+                <draggable tag="div" :list="form" handle=".handle">
 
-                    <div class="padding-t col-md-4 col-sm-2" v-for="(element, idx) in form.images">
+                    <div class="padding-t col-md-4 col-sm-2" v-for="(element, idx) in form">
 
                         <div class="block">
 
@@ -48,6 +48,7 @@
                             </el-button>
 
                             <el-button
+                                v-if="field.has_additional_fields"
                                 @click="showEditImage(idx)"
                                 :title="lang.image_edit"
                                 size="small"
@@ -78,7 +79,7 @@
                     <div style="clear: left;"></div>
                 </draggable>
 
-                <div class="padding-trl">
+                <div class="padding-trl" v-if="field.has_additional_fields">
                     <div class="block padding-b">
                         <div class="col-12">
                             <el-button
@@ -92,14 +93,19 @@
                     </div>
                 </div>
 
-                <AddImageComponent
-                    v-if="showModal"
-                    :updateImageData="updateImageData"
-                    :lang="lang"
-                    :upload_image_route="upload_image_route"
-                    :locales="locales"
-                    :default_locale="default_locale">
-                </AddImageComponent>
+                <template v-if="field.has_additional_fields">
+                    <AddImageComponent
+                        :item_field="field"
+                        v-if="showModal"
+                        :formData="formData"
+                        :updateImageData="updateImageData"
+                        :lang="lang"
+                        :upload_image_route="upload_image_route"
+                        :locales="locales"
+                        :edit_data="edit_data"
+                        :default_locale="default_locale">
+                    </AddImageComponent>
+                </template>
             </el-row>
         </div>
     </div>
@@ -122,6 +128,8 @@
     export default {
         components: {AddImageComponent, draggable},
         props: [
+            'field',
+            'formData',
             'updateData',
             'lang',
             'upload_image_route',
@@ -136,48 +144,48 @@
         watch: {
             item() {
 
-                if (this.item && this.item.galleries) {
+                if (this.item) {
 
-                    this.locales.forEach((locale) => {
-
-                        this.form.cover = this.item.galleries.fullFileUrl;
-                        this.form.id = this.item.galleries.id;
-
-                        let translationsData = this.getTranslationItem(this.item.galleries.translations, locale);
-
-                        this.form[locale] = {
-                            title: translationsData.title,
-                            description: translationsData.description,
-                        }
-
-                    });
-
-                    if (this.item.galleries.images) {
-
-                        this.form.images = [];
-
-                        this.item.galleries.images.forEach((image) => {
-
-                            let pushData = {
-                                id: image.id,
-                                url: image.fullFileUrl
-                            };
-
-                            this.locales.forEach((locale) => {
-
-                                let translationsData = this.getTranslationItem(image.translations, locale);
-
-                                pushData[locale] = {
-                                    title: translationsData.title,
-                                }
-
-                            });
-
-                            this.form.images.push(pushData)
-
-                        });
-
-                    }
+                    // this.locales.forEach((locale) => {
+                    //
+                    //     this.form.cover = this.item.galleries.fullFileUrl;
+                    //     this.form.id = this.item.galleries.id;
+                    //
+                    //     let translationsData = this.getTranslationItem(this.item.galleries.translations, locale);
+                    //
+                    //     this.form[locale] = {
+                    //         title: translationsData.title,
+                    //         description: translationsData.description,
+                    //     }
+                    //
+                    // });
+                    //
+                    // if (this.item.galleries.images) {
+                    //
+                    //     this.form.images = [];
+                    //
+                    //     this.item.galleries.images.forEach((image) => {
+                    //
+                    //         let pushData = {
+                    //             id: image.id,
+                    //             url: image.fullFileUrl
+                    //         };
+                    //
+                    //         this.locales.forEach((locale) => {
+                    //
+                    //             let translationsData = this.getTranslationItem(image.translations, locale);
+                    //
+                    //             pushData[locale] = {
+                    //                 title: translationsData.title,
+                    //             }
+                    //
+                    //         });
+                    //
+                    //         this.form.images.push(pushData)
+                    //
+                    //     });
+                    //
+                    // }
 
                 }
 
@@ -188,21 +196,19 @@
                 activeTabName: 'ka',
                 dialogVisible: false,
                 loading: false,
-                form: {
-                    en: {},
-                    ka: {},
-                    images: []
-                },
+                form: [],
                 editor: ClassicEditor,
                 editorConfig: this.editor_config,
                 showModal: false,
 
                 dialogImageUrl: '',
                 disabled: false,
-                fileList: []
+                fileList: [],
+                edit_data: {}
             }
         },
         created() {
+            console.log(this.item);
             // Set upload plugin.
             this.editorConfig.extraPlugins = [this.meyCustomUploadAdapterPlugin];
         },
@@ -241,9 +247,7 @@
 
                         this.updateImageData({
                             image_id:   data.file.id,
-                            url:        file.url,
-                            ka: {},
-                            en: {}
+                            url:        file.url
                         });
                     }
                     this.loading = false
@@ -264,67 +268,26 @@
 
             },
 
-            /**
-             * File upload.
-             */
-            async handleFileUpload() {
-
-                let file = this.$refs.file[0].files[0];
-
-                this.form = {...this.form, ...{cover: URL.createObjectURL(file)}};
-
-                var data = new FormData();
-                data.append('file', file);
-                data.append('type', 'gallery_cover_image');
-
-                await getData({
-                    method: 'POST',
-                    url: this.routes.upload_image,
-                    data: data
-                }).then(response => {
-
-                    // Parse response notification.
-                    responseParse(response);
-
-                    if (response.code == 200) {
-
-                        // Response data.
-                        let data = response.data;
-
-                        // Set image.
-                        this.form.cover_image_id = data.image.id;
-
-                    }
-
-                    this.loading = false
-
-
-                });
-
-            },
-
             showAdd() {
-                // this.$store.dispatch(types.GALLERY_EDIT_DATA, undefined);
+                this.edit_data = undefined;
                 this.forceRerender(true);
             },
 
             showEditImage(index) {
                 this.edit_data = '';
-                this.form.images[index].index = index;
-                let data = Object.assign({}, JSON.parse(JSON.stringify(this.form.images[index])));
-                // this.$store.dispatch(types.GALLERY_EDIT_DATA, data);
+                this.form[index].index = index;
+                this.edit_data = Object.assign({}, JSON.parse(JSON.stringify(this.form[index])));
                 this.forceRerender(true);
             },
 
             removeImage(index) {
-
                 this.$confirm(this.lang.remove_image_confirm, {
                     confirmButtonText: this.lang.remove_image_confirm_yes,
                     cancelButtonText: this.lang.remove_image_confirm_no,
                     type: 'warning'
                 })
                     .then(async () => {
-                        this.form.images = this.form.images.filter((item, i) => {
+                        this.form = this.form.filter((item, i) => {
                             return i != index;
                         });
                     });
@@ -336,16 +299,20 @@
              */
             updateImageData(data = undefined, index = '') {
 
-                if (data && index !== '') {
-                    this.form.images[index] = data;
-                } else if (data) {
-                    this.form.images.push(data);
-                } else {
-                    let oldData = this.form.images;
-                    this.form.images = {};
-                    this.form.images = oldData;
+                if (data && !data.inputs) {
+                    data.inputs = this.field.inputs;
                 }
-                // this.forceRerender();
+
+                if (data && index !== '') {
+                    this.form[index] = data;
+                } else if (data) {
+                    this.form.push(data);
+                } else {
+                    let oldData = this.form;
+                    this.form = {};
+                    this.form = oldData;
+                }
+
             },
 
             forceRerender(showComponent = false) {
@@ -370,7 +337,7 @@
                     if (item.locale == locale) {
                         searchItem = item;
                     }
-                })
+                });
 
                 return searchItem;
             }
